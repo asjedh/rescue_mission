@@ -1,0 +1,21 @@
+<h1><%= @question.title %></h1>
+
+<p><%= @question.description %></p>
+<br>
+
+<%= link_to "Edit this question", edit_question_path(@question.id) %>
+<%= button_to "Delete", @question , :method => :delete, :class =>:destroy %>
+
+<h1>Answers</h1>
+
+<ol>
+  <% @answers.each do |answer| %>
+    <li><%= "#{answer.user.user_name}: #{answer.body}" %></li>
+  <% end %>
+</ol>
+
+
+<%= form_for @create_answer, url: question_answers_path(@question.id) do |f| %>
+  <%= f.text_area :body %>
+  <%= f.submit %>
+<% end %>
